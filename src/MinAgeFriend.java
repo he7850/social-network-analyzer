@@ -86,11 +86,16 @@ public class MinAgeFriend {
         }
     }
     public static void main(String[] args) throws Exception {
-        String input = MutualFriends.friendsRecordsInputFile, output = "hdfs://localhost:9000/user/bryan/output/hw1/min_age_friends";
-        if (args.length==2){
+        String input = MutualFriends.friendsRecordsInputFile;
+        String output = "hdfs://localhost:9000/user/bryan/output/hw1/min_age_friends";
+        String src = "hdfs://localhost:9000/user/bryan/input/hw1/userdata.txt";
+        if (args.length==3){
             input = args[0];
-            output = args[1];
+            src = args[1];
+            output = args[2];
         }
+        UserData.setUserDataSrc(src);
+
         Job job = Job.getInstance();
         job.setJarByClass(MinAgeFriend.class);
         Configuration conf = job.getConfiguration();

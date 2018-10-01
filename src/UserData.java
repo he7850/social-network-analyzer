@@ -19,9 +19,9 @@ public class UserData {
     private UserData() throws IOException {
         loadInfo(userDataSrc);
     }
-    static String userDataSrc = "hdfs://localhost:9000/user/bryan/input/hw1/userdata.txt";
+    static String userDataSrc = "";
     static UserData userData;
-    public void setUserDataSrc(String src){
+    public static void setUserDataSrc(String src){
         userDataSrc = src;
     }
 

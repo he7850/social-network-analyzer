@@ -58,36 +58,6 @@ public class MutualFriendsInfo {
             }
         }
 
-//        @Override
-//        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
-//            try {
-//
-//                // format:
-//                // id1,id2  id1,id2,...
-//                String fields[] = value.toString().split("\t");
-//                if (fields.length > 0 && searchKey.equals(fields[0])) {
-//                    ArrayList<String> friendsInfos = new ArrayList<>();
-//                    if (fields.length > 1) {
-//                        String[] friendsArray = fields[1].split(",");
-//                        for (String friendId : friendsArray) {
-//                            String firstName = userData.idToFisrtName(friendId);
-//                            String state = userData.idToState(friendId);
-//                            friendsInfos.add(firstName + ": " + state);
-//                        }
-//                    }
-//                    // format: id1,id2 [Evangeline: Ohio, Charlotte: California]
-//                    Text newKey = new Text(fields[0]);
-//                    Text newValue = new Text("[" + String.join(", ", friendsInfos) + "]");
-//                    context.write(newKey, newValue);
-//                }
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                System.out.println(value.toString());
-//                throw new IOException();
-//            }
-//        }
-
 
     }
 
@@ -146,11 +116,15 @@ public class MutualFriendsInfo {
     }
 
     public static void main(String[] args) throws Exception {
-        String input = MutualFriends.friendsRecordsInputFile, output = "hdfs://localhost:9000/user/bryan/output/hw1/mutual_friends_info";
-        if (args.length==2){
+        String input = MutualFriends.friendsRecordsInputFile;
+        String src = "hdfs://localhost:9000/user/bryan/input/hw1/userdata.txt";
+        String output = "hdfs://localhost:9000/user/bryan/output/hw1/mutual_friends_info";
+        if (args.length==3){
             input = args[0];
-            output = args[1];
+            src = args[1];
+            output = args[2];
         }
+        UserData.setUserDataSrc(src);
         String searchKey = "26, 28";
         if (args.length == 1) {
             searchKey = args[0];
